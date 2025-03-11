@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Chat Bot</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>MAY I HELP YOU?</h1>
+    </div>
+
+    <!-- AI Therapist Chat-Bot Section -->
+    <div class="description">
+        <h2>AI Therapist Chat-Bot</h2>
+    </div>
+
+    <!-- Chatbot Section -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-header">
+            <h3>AI Therapist Chat-Bot</h3>
+            <button id="close-chatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Type your message..." />
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+    <button id="open-chatbot">Chat with AI</button>
+
+    <!-- Communication Features -->
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <div id="chat-form">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-btn">Send</button>
+        </div>
+        <div id="actions"></div>
+        <button id="voice-call-btn">Start Voice Call</button>
+        <button id="video-call-btn">Start Video Call</button>
+    </div>
+
+    <audio id="remoteAudio" autoplay></audio>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

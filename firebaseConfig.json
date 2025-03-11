@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "healthista-main",
+  "private_key_id": "2e596456f4defe3ef1e97afc83d823e84258e83a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC08x429H7wZta/\nUUNbAn3wIUwKeUUahlnIvFy+tR6guRCLDBYTojFsjmDZecW7qevs0qY3MSAJe+iP\nQcL8djqM7ocAmO6wk7FsfbTCpPNLbLk64R8Pc9cdvjV0oNN6ryNELX8KL9RG8RYv\ngbQY7Px6ngmvJgtmRmmAxTB/23q9ZOGCzW25i+dwJHeMR7+5CY2BBU/O14IQ2KNq\nYe6vuX+29qNcYzd4VTjw31P+Nic2WL2/VOeqLt7KSRvLgCILtp/G5dNWtvzUQAgH\nI/KC45jXrdMzX2mXmofM3qXwJmRuspBS7yNGxXXFyj1VHY766MVvi4iDw36ev9pf\ns7uaaqLTAgMBAAECggEAR1NhwJXFh6tx0L4Oh8xGqiXl3GcK9zaoI3kkMcQhC4eH\nXtfnx9tyEfFZecAHUj7bkWFDRZQmpbZi6D0qx+sujyjirDicNZwyHqq6WtM8V6nG\npc/hN20ZCU9VsOBIHB73DsPERNavnTsg3J8Kx5x6tTagaJrdeXYd1jVkNbHlAswb\ny8H/Ru8VriwZsTE0rJGhmJq/C8BGwTIeUApAnEZ1cAoS0e1Z9J76Y18oQLEL6kfB\n56saAzcbr2g6iCwmzSOtd47yPM36PGHyKcCD3A5tXyBrzfgmwoomvtYk7U/2YLE/\nrhxmRaN0GkBg5hqAsNpf2QveLgK+t7RUlHTbOOO8WQKBgQDqtDn0Sa/Fo0pcDEga\nSuc/wCdA+/yfRLgFvaHuPzOFYAwpuyInWbDmow42emo3rztLDqe/v+94OppYuKl6\nR0uowZwqtf92QLDHcBKhq+ecNM27L3UuCDckVNL6D+KKn/5rbG3AwQCYf/saDJ64\nkf5TvXN9+J8WQG89Mp2AV5EqVwKBgQDFXkUyS46DKVela/jPTSaxL6A77Zu5yTID\nMv4XEXzVf/UPaBzN3O49F/EWijIFPKfviiCPCxFXQWLafxOXS1XIGvTVMdV+Fw0N\nR7aOQ9c3nSjSksuD01Ih/CyTBIk49v2hrl2WO0UR77K0gbDdQQStp96rzA1cNGLT\nS7Gj5rp15QKBgHIsdFjjE6+4LK80hkrMD0yS5EWXj5/G5SJdyo1Ej4KdY61VTFsK\nJaU8wug7irpF8zkjCvWboBnDoFvykPdcAXE5pgec+4YCGD0cxuOA5a22fjJF9uIK\nuxBgdzWQTqsTA8gsOgPfn7OP5o4Yf4nX83m3Gpy4OmOvuq1xlu7dKlAHAoGBAKpv\nl+2w1aZqQye0r63EgA8ug35816d+GNQuasFc9qIf122wiH81s/3J+QVv3XYsRRFU\nBH3CHv1sl4L7jd1uzur4bEjWufgiy8CWFw2PhACglKoS3fA+woRakdt7ZUxt7eR7\nAJJFKIYuqfG6tRK7nOChQGa21Sq0ikrQ6NwS2R4JAoGAD/zk/+RtdDZvc1g77Z/c\nScNGCHY3E0xYGH1NawtzZYV9rz+T/IZUlHX1yVUOarEI2FOmBOajUbfElcknvlGB\nPkv2tAEpkbgh1iHDZwRH4nFTBkCF6gTtEmhiZQ3uMLOi6yDJE63BBuS9Qfqur7si\nXy3Li7T0Z8qsct/wchrAtH8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@healthista-main.iam.gserviceaccount.com",
+  "client_id": "117503100262425245576",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40healthista-main.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
