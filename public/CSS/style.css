@@ -208,27 +208,29 @@ header {
 .login-button {
   border: none;
   cursor: pointer;
-  background-color: #ac120a;
-  box-shadow: inset 0 0 0 0 #ea097f;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  transition: ease-out 0.4s;
-  -webkit-transition: ease-out 0.4s;
-  -moz-transition: ease-out 0.4s;
-  -ms-transition: ease-out 0.4s;
-  -o-transition: ease-out 0.4s;
-  /* z-index: -9999; */
+  background-color: #4a90e2; /* Professional blue color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 50px; /* Fully rounded edges */
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  transition: all 0.4s ease-out; /* Smooth transition for all properties */
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -ms-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  overflow: hidden; /* Ensures the hover effect stays within the button */
+  position: relative; /* For pseudo-element positioning */
+  display: inline-block; /* Ensures the button takes only the required space */
 }
 
 .login-button a {
   display: block;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  color: #fff;
+  font-weight: 500; /* Slightly bolder text */
+  color: #fff; /* White text for contrast */
   height: 2.4rem;
   width: 7.9rem;
   letter-spacing: 1px;
@@ -236,15 +238,54 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* Ensures text stays above the pseudo-element */
+  z-index: 1; /* Ensures text is above the hover effect */
 }
 
-.login-button a:hover {
-  color: #ffffff;
+/* Hover effect using a pseudo-element */
+.login-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #357abd; /* Darker blue for hover */
+  border-radius: 50px; /* Match the button's rounded shape */
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  transform: scaleX(0); /* Start with no width */
+  transform-origin: right;
+  transition: transform 0.4s ease-out; /* Smooth transition for the hover effect */
+  -webkit-transition: transform 0.4s ease-out;
+  -moz-transition: transform 0.4s ease-out;
+  -ms-transition: transform 0.4s ease-out;
+  -o-transition: transform 0.4s ease-out;
+  z-index: 0; /* Ensures the effect is behind the text */
+}
+
+.login-button:hover::before {
+  transform: scaleX(1); /* Expand the hover effect */
+  transform-origin: left;
 }
 
 .login-button:hover {
-  box-shadow: inset 130px 0 0 0 #0909ea;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
+
+/* Optional: Add a subtle animation on hover */
+.login-button:hover a {
+  color: #ffffff; /* Ensure text color remains consistent */
+  transform: scale(1.05); /* Slightly enlarge the text */
+  transition: transform 0.2s ease-out;
+  -webkit-transition: transform 0.2s ease-out;
+  -moz-transition: transform 0.2s ease-out;
+  -ms-transition: transform 0.2s ease-out;
+  -o-transition: transform 0.2s ease-out;
+}
+
 
 .menu {
   display: none;
