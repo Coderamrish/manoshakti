@@ -63,6 +63,25 @@ document.addEventListener("DOMContentLoaded", () => {
         appendMessage("bot", "Sorry, something went wrong. Please try again.", "AI Therapist");
       }
     }
+    // Emit chat message
+socket.emit("chatMessage", message);
+
+// Listen for incoming messages
+socket.on("message", (data) => {
+  console.log("New message:", data);
+  // Display the message in the UI
+});
+// Listen for online users
+socket.on("online-users", (users) => {
+  console.log("Online users:", users);
+  // Update the UI with the list of online users
+});
+
+// Listen for online therapists
+socket.on("online-therapists", (therapists) => {
+  console.log("Online therapists:", therapists);
+  // Update the UI with the list of online therapists
+});
   
     // Append message to chat
     function appendMessage(sender, message, username) {
@@ -198,3 +217,9 @@ socket.on("online-therapists", (therapists) => {
       await peerConnection.addIceCandidate(candidate);
     });
   });
+  // Send ICE candidates to the other peer
+peerConnection.onicecandidate = (event) => {
+  if (event.candidate) {
+    socket.emit("video-candidate", event.candidate);
+  }
+};

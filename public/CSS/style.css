@@ -95,7 +95,7 @@ body {
 
 header {
   width: 100%;
-  background-image: url("../images/frontpage/welcome.jpg");
+  background-image: url("../images/frontpage/welcome.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -378,7 +378,11 @@ header {
   text-align: center;
 }
 
-
+.auto-type {
+  color: #33ffad; /* Set text color */
+  font-weight: bold;
+  font-size: 20px;
+}
 
 
 /* Move the background and make it smaller. */

@@ -6,6 +6,7 @@
     <title>Healthcare Chat Bot</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -42,21 +43,24 @@
         </div>
         <div class="chatbot-input">
             <input type="text" id="chatbot-input" placeholder="Type your message..." />
-            <button id="send-message">Send</button>
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
-    <button id="open-chatbot">Chat with AI</button>
+    <button id="open-chatbot" class="floating-btn">
+        <i class="fas fa-comment-dots"></i> Chat with AI
+    </button>
 
     <!-- Communication Features -->
     <div id="chat-container">
         <div id="chat-log"></div>
         <div id="chat-form">
             <input type="text" id="user-input" placeholder="Type your message...">
-            <button id="send-btn">Send</button>
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
         </div>
-        <div id="actions"></div>
-        <button id="voice-call-btn">Start Voice Call</button>
-        <button id="video-call-btn">Start Video Call</button>
+        <div id="actions">
+            <button id="voice-call-btn"><i class="fas fa-phone"></i> Voice Call</button>
+            <button id="video-call-btn"><i class="fas fa-video"></i> Video Call</button>
+        </div>
     </div>
 
     <audio id="remoteAudio" autoplay></audio>

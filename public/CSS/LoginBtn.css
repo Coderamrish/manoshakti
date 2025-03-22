@@ -143,3 +143,29 @@
         font-size: 14px;
     }
 }
+.google-signin {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#googleSignInBtn {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#googleSignInBtn img {
+    width: 24px;
+    height: 24px;
+}
+
+#googleSignInBtn:hover {
+    background-color: #f1f1f1;
+}

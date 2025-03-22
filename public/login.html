@@ -12,7 +12,7 @@
     <div class="container">
         <div class="form-box">
             <h1 id="title">Sign Up</h1>
-            <form>
+            <form id="authForm">
                 <div class="input-group">
                     <div class="input-field" id="nameField">
                         <i class="fas fa-user"></i>
@@ -34,12 +34,46 @@
                     <button type="button" id="logoutBtn" style="display: none;">Logout</button>
                 </div>
                 <p class="terms">By creating an account, you agree to our <a href="#">Terms & Conditions</a></p>
+                <!-- Google Sign-In Button -->
+                <div class="google-signin">
+                    <button type="button" id="googleSignInBtn">
+                        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo">
+                        Sign in with Google
+                    </button>
+                </div>
             </form>
         </div>
     </div>
-    <script>
-         document.getElementById("signupBtn").addEventListener("click", async function (event) {
-            event.preventDefault();
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signInWithPopup, 
+            GoogleAuthProvider, 
+            signOut 
+        } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAyTdR0qkom-1lO4EPoTVVMwRzzBkTbJzU",
+            authDomain: "manoshakti-a9d09.firebaseapp.com",
+            projectId: "manoshakti-a9d09",
+            storageBucket: "manoshakti-a9d09.firebasestorage.app",
+            messagingSenderId: "693355060759",
+            appId: "1:693355060759:web:10f6ef8c668bbe49f30652"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Firebase Email/Password Sign-Up
+        document.getElementById("signupBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
@@ -50,78 +84,109 @@
             }
 
             try {
-                const response = await fetch("http://localhost:3000/signup", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, password })
-                });
+                // Create user with email and password
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("User created:", user);
 
-                const data = await response.json();
-                alert(data.message || data.error);
+                // Save additional user data to Firestore (optional)
+                const usersRef = db.collection("users");
+                await usersRef.add({ name, email, uid: user.uid });
 
-                if (response.ok) {
-                    window.location.href = "/index.html"; // Redirect on successful signup
-                }
+                alert("Sign-up successful!");
+                window.location.href = "/index.html"; // Redirect after successful sign-up
             } catch (error) {
-                console.error("Error:", error);
-                alert("Failed to sign up. Try again.");
+                console.error("Sign-up Error:", error);
+                alert(error.message || "Failed to sign up. Try again.");
             }
         });
 
-        document.getElementById("loginBtn").addEventListener("click", async function () {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-    
+        // Firebase Email/Password Login
+        document.getElementById("loginBtn").addEventListener("click", async () => {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
             if (!email || !password) {
                 alert("Email and password are required");
                 return;
             }
-    
+
             try {
-                const response = await fetch("http://localhost:3000/login", {
+                // Sign in with email and password
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                console.log("User logged in:", user);
+
+                alert("Login successful!");
+                localStorage.setItem("loggedIn", "true");
+                checkAuthStatus();
+                window.location.href = "/index.html"; // Redirect after successful login
+            } catch (error) {
+                console.error("Login Error:", error);
+                alert(error.message || "Failed to login. Try again.");
+            }
+        });
+
+        // Google Sign-In
+        document.getElementById("googleSignInBtn").addEventListener("click", async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                console.log("Google Sign-In Success:", user);
+
+                // Send user data to your backend (optional)
+                const response = await fetch("http://localhost:3000/google-login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    credentials: "include", // Ensure cookies are included
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({
+                        name: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL,
+                        uid: user.uid
+                    })
                 });
-    
+
                 const data = await response.json();
-                console.log("Login Response:", data);
-                alert(data.message || data.error);
-    
+                console.log("Backend Response:", data);
+
                 if (response.ok) {
-                    localStorage.setItem("loggedIn", "true"); // Store login status
+                    localStorage.setItem("loggedIn", "true");
                     checkAuthStatus();
-                    window.location.href = data.redirect; // Redirect after successful login
+                    window.location.href = "/index.html"; // Redirect after successful login
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("Failed to login. Try again.");
+                console.error("Google Sign-In Error:", error);
+                alert("Failed to sign in with Google. Try again.");
             }
         });
-          // LOGOUT FUNCTION
-          document.getElementById("logoutBtn").addEventListener("click", async function () {
+        createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+
+
+        // Logout Function
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
             try {
-                const response = await fetch("http://localhost:3000/logout", {
-                    method: "POST",
-                    credentials: "include" // Ensure cookies are included
-                });
-
-                if (response.ok) {
-                    alert("Logged out successfully!");
-                    localStorage.removeItem("loggedIn"); // Remove login status
-                    checkAuthStatus();
-                    window.location.href = "/index.html"; // Redirect to login page
-                } else {
-                    alert("Failed to log out.");
-                }
+                await signOut(auth);
+                localStorage.removeItem("loggedIn");
+                checkAuthStatus();
+                alert("Logged out successfully!");
+                window.location.href = "/index.html"; // Redirect to login page
             } catch (error) {
-                console.error("Error:", error);
-                alert("Logout failed.");
+                console.error("Logout Error:", error);
+                alert("Failed to log out.");
             }
         });
 
-        // FUNCTION TO CHECK LOGIN STATUS
+        // Check Auth Status
         function checkAuthStatus() {
             const isLoggedIn = localStorage.getItem("loggedIn") === "true";
             document.getElementById("logoutBtn").style.display = isLoggedIn ? "block" : "none";
@@ -132,8 +197,5 @@
         // Check login status on page load
         checkAuthStatus();
     </script>
-    
-    
-    
 </body>
 </html>
