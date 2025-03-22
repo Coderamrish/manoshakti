@@ -177,7 +177,7 @@ async function getGroqChatStream(ques) {
       },
       {
         role: "user",
-        content: `${ques}. Please respond in 30-50 words and don't ask more than 13 questions.`,
+        content: `${ques}. Please respond in 20-30 words and don't ask more than 13 questions.`,
       },
     ],
     model: "llama3-8b-8192",
@@ -205,7 +205,7 @@ async function main(ques) {
 }
 
 // Example usage
-const userQuestion = "I’ve been feeling really down lately. Can you help me?";
+const userQuestion = "";
 main(userQuestion).then(console.log);
 
 export { main };

@@ -27,7 +27,7 @@ const io = new Server(server, {
 const serviceAccount = JSON.parse(readFileSync("./firebaseConfig.json"));
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://healthista-main.firebaseio.com",
+  databaseURL: "https://manoshakti-a9d09.firebaseapp.com",
 });
 const db = admin.firestore(); // Firestore Database
 
@@ -42,6 +42,8 @@ app.use(express.static(path.join(process.cwd(), "public")));
 
 // Import graqai.mjs dynamically
 const { main } = await import("./graqai.mjs");
+
+
 
 // Routes
 app.get("/", (req, res) => {
@@ -99,8 +101,30 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ error: "Error logging in" });
   }
 });
+app.post("/google-login", async (req, res) => {
+  const { name, email, photoURL, uid } = req.body;
 
-app.post("/logout", (req, res) => {
+  try {
+      // Check if the user already exists in your database
+      const usersRef = db.collection("users");
+      const userSnapshot = await usersRef.where("email", "==", email).get();
+
+      if (userSnapshot.empty) {
+          // Create a new user if they don't exist
+          await usersRef.add({ name, email, photoURL, uid });
+      }
+
+      // Generate a JWT token for the user
+      const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
+      res.cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+      res.status(200).json({ message: "Google login successful", redirect: "/index.html" });
+  } catch (error) {
+      console.error("Google Login Error:", error);
+      res.status(500).json({ error: "Error logging in with Google" });
+  }
+});
+
+app.post("/logout", (req, res) => { 
   res.clearCookie("authtoken");
   res.status(200).json({ message: "Logout successful" });
 });
@@ -133,6 +157,10 @@ app.post("/groq", async (req, res) => {
 });
 
 // Socket.IO for Real-Time Features
+let users = {};
+let servers = { "Therapist 1": [], "Therapist 2": [] };
+let chatHistory = { "Therapist 1": [], "Therapist 2": [] };
+
 const onlineUsers = new Map(); // Track online users
 const onlineTherapists = new Set(); // Track online therapists
 
@@ -204,6 +232,7 @@ io.on("connection", (socket) => {
     console.log("User disconnected:", socket.id);
   });
 });
+
 
 // Start Server
 server.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
